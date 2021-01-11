@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DocksApiApplication {
+public class DocsApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DocksApiApplication.class, args);
+		SpringApplication.run(DocsApiApplication.class, args);
 	}
 
 }
