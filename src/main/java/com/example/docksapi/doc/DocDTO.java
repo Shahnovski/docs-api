@@ -27,8 +27,6 @@ public class DocDTO {
     @NotNull(message = "DocStatus should not be empty")
     private DocStatus docStatus;
 
-    private String docAuthorName;
-
     @NotBlank(message = "DocClientName should not be empty")
     @Size(min = 5, max = 50, message = "DocClientName should be between 5 and 50 characters")
     private String docClientName;
@@ -44,4 +42,9 @@ public class DocDTO {
     @NotNull(message = "DocFileContent should not be empty")
     @Size(min = 1, message = "DocFileContent should not be empty")
     private byte[] docFileContent;
+
+    @NotNull(message = "DocAuthorId should not be empty")
+    private Long docAuthorId;
+
+    private String docAuthorName;
 }

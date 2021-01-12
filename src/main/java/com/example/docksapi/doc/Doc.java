@@ -1,8 +1,11 @@
 package com.example.docksapi.doc;
 
+import com.example.docksapi.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -38,9 +41,6 @@ public class Doc {
     @NotNull(message = "DocStatus should not be empty")
     private DocStatus docStatus;
 
-    @Column(name = "docAuthorName", nullable = false)
-    private String docAuthorName;
-
     @Column(name = "docClientName", nullable = false)
     @NotBlank(message = "DocClientName should not be empty")
     @Size(min = 5, max = 50, message = "DocClientName should be between 5 and 50 characters")
@@ -61,5 +61,10 @@ public class Doc {
     @NotNull(message = "DocFileContent should not be empty")
     @Size(min = 1, message = "DocFileContent should not be empty")
     private byte[] docFileContent;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User docAuthor;
 
 }
