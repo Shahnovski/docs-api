@@ -23,6 +23,7 @@ create table users (
     id int8 not null,
     password varchar(255),
     username varchar(255),
+    active boolean not null,
     primary key (id)
 );
 

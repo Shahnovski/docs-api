@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -29,6 +30,9 @@ public class User {
 
     @Column(name = "password")
     String password;
+
+    @Column(name = "active")
+    Boolean active;
 
     @OneToMany(mappedBy = "docAuthor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Doc> docs;
