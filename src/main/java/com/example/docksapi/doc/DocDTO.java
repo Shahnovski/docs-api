@@ -43,7 +43,6 @@ public class DocDTO {
     @Size(min = 1, message = "DocFileContent should not be empty")
     private byte[] docFileContent;
 
-    @NotNull(message = "DocAuthorId should not be empty")
     private Long docAuthorId;
 
     private String docAuthorName;
