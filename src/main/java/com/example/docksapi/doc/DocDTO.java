@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.util.Date;
 
@@ -25,6 +24,7 @@ public class DocDTO {
     @NotNull(message = "DocDeadlineDate should not be empty")
     private Date docDeadlineDate;
 
+    @NotNull(message = "DocStatus should not be empty")
     private DocStatus docStatus;
 
     private String docAuthorName;

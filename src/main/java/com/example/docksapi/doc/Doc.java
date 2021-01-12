@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.io.File;
 import java.util.Date;
 
 @Data
@@ -36,6 +35,7 @@ public class Doc {
 
     @Column(name = "docStatus", nullable = false)
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "DocStatus should not be empty")
     private DocStatus docStatus;
 
     @Column(name = "docAuthorName", nullable = false)
