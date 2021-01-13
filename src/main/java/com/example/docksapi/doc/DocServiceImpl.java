@@ -133,7 +133,7 @@ public class DocServiceImpl implements DocService {
         docRepository.save(doc);
     }
 
-    private boolean allowEditDoc(Authentication authentication, Doc doc) {
+    public boolean allowEditDoc(Authentication authentication, Doc doc) {
         User currentUser = authInfoService.getUserByAuthentication(authentication);
         return doc.getDocAuthor().getId().equals(currentUser.getId()) || currentUser.getRoles().contains(Role.ADMIN);
     }

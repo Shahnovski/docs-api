@@ -15,4 +15,6 @@ public interface DocService {
     DocDTO saveDoc(Long id, DocDTO docDTO, Authentication authentication);
 
     void deleteDoc(Long id, Authentication authentication);
+
+    boolean allowEditDoc(Authentication authentication, Doc doc);
 }
