@@ -1,12 +1,14 @@
 package com.example.docksapi.doc;
 
+import com.example.docksapi.doc.page.DocPageDTO;
+import com.example.docksapi.doc.page.request.DocPageRequestDTO;
 import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
 public interface DocService {
 
-    List<DocDTO> getDocList(Authentication authentication);
+    DocPageDTO getDocList(DocPageRequestDTO docPageRequestDTO, Authentication authentication);
 
     DocDTO getDocById(Long id, Authentication authentication);
 

@@ -1,6 +1,8 @@
 package com.example.docksapi.doc;
 
 import com.example.docksapi.common.ApplicationProperties;
+import com.example.docksapi.doc.page.DocPageDTO;
+import com.example.docksapi.doc.page.request.DocPageRequestDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -23,8 +25,8 @@ public class DocController {
 
     @RolesAllowed({"ADMIN", "USER"})
     @GetMapping(value = "", produces = "application/json; charset=UTF-8")
-    List<DocDTO> getDocList(Authentication authentication) {
-        return docService.getDocList(authentication);
+    DocPageDTO getDocList(DocPageRequestDTO docPageRequestDTO, Authentication authentication) {
+        return docService.getDocList(docPageRequestDTO, authentication);
     }
 
     @RolesAllowed({"ADMIN", "USER"})
