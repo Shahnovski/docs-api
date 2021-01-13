@@ -78,6 +78,9 @@ public class DocServiceImpl implements DocService {
                 System.out.println(ex.getMessage());
             }
         }
+        DocSpecification isDeleteSpecification = new DocSpecification(new SearchCriteria("isDeleted",":",false));
+        if (specification == null) specification = Specification.where(isDeleteSpecification);
+        else specification = specification.and(isDeleteSpecification);
         Page page = docRepository.findAll(specification, pageable);
         DocPage docPage = DocPage.builder()
                 .docs(docMapper.toDocDTOs(page.getContent()))
@@ -89,7 +92,11 @@ public class DocServiceImpl implements DocService {
 
     @Override
     public DocDTO getDocById(Long id, Authentication authentication) {
-        return docMapper.toDocDTO(docRepository.findById(id).orElseThrow(DocNotFoundException::new));
+        Doc doc = docRepository.findById(id).orElseThrow(DocNotFoundException::new);
+        if (doc.getIsDeleted()) {
+            throw new DocNotFoundException();
+        }
+        return docMapper.toDocDTO(doc);
     }
 
     @Override
@@ -98,6 +105,9 @@ public class DocServiceImpl implements DocService {
         if (id != null) {
             modifiedDoc.setId(id);
             Doc doc = docRepository.findById(id).orElseThrow(DocNotFoundException::new);
+            if (doc.getIsDeleted()) {
+                throw new DocNotFoundException();
+            }
             modifiedDoc.setDocAuthor(doc.getDocAuthor());
             if (!allowEditDoc(authentication, modifiedDoc)) {
                 throw new AccessDeniedException("The document does not belong to this user");
@@ -106,16 +116,21 @@ public class DocServiceImpl implements DocService {
         else {
             modifiedDoc.setDocAuthor(authInfoService.getUserByAuthentication(authentication));
         }
+        modifiedDoc.setIsDeleted(false);
         return docMapper.toDocDTO(docRepository.save(modifiedDoc));
     }
 
     @Override
     public void deleteDoc(Long id, Authentication authentication) {
         Doc doc = docRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        if (doc.getIsDeleted()) {
+            throw new DocNotFoundException();
+        }
         if (!allowEditDoc(authentication, doc)) {
             throw new AccessDeniedException("The document does not belong to this user");
         }
-        docRepository.deleteById(id);
+        doc.setIsDeleted(true);
+        docRepository.save(doc);
     }
 
     private boolean allowEditDoc(Authentication authentication, Doc doc) {

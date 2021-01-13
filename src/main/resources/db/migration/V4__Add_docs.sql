@@ -7,10 +7,11 @@ INSERT INTO "doc" (
                    doc_name,
                    doc_status,
                    doc_worker_name,
-                   user_id
+                   user_id,
+                   is_deleted
                    )
                    VALUES
 
-(1, 'Client 1', '2012-12-12', '2013-12-12', lo_import('D:/1.txt'), 'file1.txt', 'Document 1', 'COMPLETE', 'Worker 1', 1),
-(2, 'Client 2', '2011-11-11', '2014-12-12', lo_import('D:/2.txt'), 'file2.txt', 'Document 2', 'IN_WORK', 'Worker 2', 2);
+(1, 'Client1', '2012-12-12', '2013-12-12', lo_import('D:/1.txt'), 'file1.txt', 'Document1', 'COMPLETE', 'Worker1', 1, false),
+(2, 'Client2', '2011-11-11', '2014-12-12', lo_import('D:/2.txt'), 'file2.txt', 'Document2', 'IN_WORK', 'Worker2', 2, false);
 --Files 1.txt and 2.txt are in the static/test_files directory

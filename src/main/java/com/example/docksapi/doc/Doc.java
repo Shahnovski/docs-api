@@ -67,4 +67,7 @@ public class Doc {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User docAuthor;
 
+    @Column(name = "isDeleted", nullable = false)
+    private Boolean isDeleted;
+
 }

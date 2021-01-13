@@ -11,6 +11,7 @@ create table doc (
     doc_status varchar(255) not null,
     doc_worker_name varchar(50) not null,
     user_id int8 not null,
+    is_deleted boolean not null,
     primary key (id)
 );
 
