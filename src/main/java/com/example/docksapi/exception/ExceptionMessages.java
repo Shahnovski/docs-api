@@ -31,5 +31,7 @@ public class ExceptionMessages {
     @Value("${exception.PropertyReferenceException.message}")
     String PropertyReferenceExceptionMessage;
 
+    @Value("${exception.JSONExceptionMessage.message}")
+    String JSONExceptionMessage;
 
 }

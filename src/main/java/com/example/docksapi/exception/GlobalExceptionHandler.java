@@ -64,4 +64,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), exceptionMessages.getPropertyReferenceExceptionMessage(), "", 500);
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(org.json.JSONException.class)
+    protected ResponseEntity<?> handleJSONException(org.json.JSONException ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), exceptionMessages.getJSONExceptionMessage(), "", 500);
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
